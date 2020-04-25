@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-course",
+  "version": "0.0.1",
+  "description": "The practical course of NodeJS.",
+  "main": "src/index.js",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.3"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ale1313@github.com/ale1313/nodejs-course.git"
+  },
+  "author": "Alejo Viotti Sosa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ale1313/nodejs-course/issues"
+  },
+  "homepage": "https://github.com/ale1313/nodejs-course#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "countries-list": "^2.5.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10"
+  }
+}

@@ -1,38 +1,28 @@
-// CORE MODULES
-const http = require("http");
-const fs = require("fs");
+// MODULES
+const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const express = require('express');
+const mongoose = require('mongoose');
+const routesV1 = require('./routes/v1');
 
-// LOCAL MODULES
-const { info, error } = require("./modules/my-log");
-// const log = require("./modules/my-log");       Another way of importing
+dotenv.config();
 
-const port = 4000;
+const { MONGO_URL, PORT } = process.env;
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write("<html><body><p>Home Page</p></body></html>");
-    res.end();
-  } else if (req.url === "/exit") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write("<html><body><p>Bye</p></body></html>");
-    res.end();
-  } else if (req.url === "/info") {
-    const result = info(req.url);
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(result);
-    res.end();
-  } else if (req.url === "/error") {
-    const result = error(req.url);
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(result);
-    res.end();
-  } else {
-    res.writeHead(404, { "Content-Type": "text/html" });
-    res.write("<html><body><p>Not found</p></body></html>");
-    res.end();
-  }
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+routesV1(app);
+
+mongoose.connect(MONGO_URL, {
+  useNewUrlParser: true, useUnifiedTopology: true,
+}).then(() => {
+  console.log('connected to mongodb');
+  app.listen(PORT, () => {
+    console.log(`Running on port ${PORT}`);
+  });
+}).catch(err => {
+  console.log(err);
 });
-
-server.listen(port);
-console.log(`Running on port ${port}`);
