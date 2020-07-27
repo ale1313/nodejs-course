@@ -1,10 +1,11 @@
-const Products = require('../../mongo/models/products');
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Request, Response } from 'express';
 
-const createProduct = async (req, res) => {
+import Products from '../../mongo/models/products';
+
+const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const {
-      description, images, name, price, user,
-    } = req.body;
+    const { description, images, name, price, user } = req.body;
 
     const product = await Products.create({
       description,
@@ -21,11 +22,16 @@ const createProduct = async (req, res) => {
   }
 };
 
-const deleteProduct = (req, res) => {};
+const deleteProduct = (req: Request, res: Response): void => {
+  console.log('');
+};
 
-const getProducts = async (req, res) => {
+const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const products = await Products.find().populate('user', 'data email name role');
+    const products = await Products.find().populate(
+      'user',
+      'data email name role'
+    );
     res.send({ status: 'ok', data: products });
   } catch (e) {
     console.log(e);
@@ -34,7 +40,7 @@ const getProducts = async (req, res) => {
   }
 };
 
-const getUserProducts = async (req, res) => {
+const getUserProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
     const products = await Products.find({ user: userId });
@@ -46,8 +52,14 @@ const getUserProducts = async (req, res) => {
   }
 };
 
-const updateProduct = (req, res) => {};
+const updateProduct = (req: Request, res: Response): void => {
+  console.log('');
+};
 
-module.exports = {
-  createProduct, deleteProduct, getProducts, getUserProducts, updateProduct,
+export default {
+  createProduct,
+  deleteProduct,
+  getProducts,
+  getUserProducts,
+  updateProduct,
 };

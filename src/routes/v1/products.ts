@@ -1,6 +1,6 @@
 // MODULES
-const express = require('express');
-const products = require('../../controllers/v1/products');
+import express from 'express';
+import products from '../../controllers/v1/products';
 
 const router = express.Router();
 
@@ -10,4 +10,4 @@ router.post('/delete', products.deleteProduct);
 router.get('/all', products.getProducts);
 router.get('/get/:userId', products.getUserProducts);
 
-module.exports = router;
+export default router;

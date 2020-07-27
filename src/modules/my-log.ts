@@ -1,9 +1,9 @@
-module.exports.info = function info(text) {
+export const info = (text: string): string => {
   console.log(`INFO: ${text}`);
   return text;
 };
 
-module.exports.error = function error(text) {
+export const error = (text: string): string => {
   console.log(`ERROR: ${text}`);
   return text;
 };
